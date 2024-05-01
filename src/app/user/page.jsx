@@ -23,11 +23,35 @@ const handleChange = (e) => {
 
 const handleSubmit = async (e) => {
     e.preventDefault();
-    // Here you would usually handle the submission to the backend
-    console.log(formData);
-    // Reset form if necessary
-    // setFormData({ username: '', email: '', age: '', gender: '', productPurchased: '', title: '', description: '' });
-};
+    console.log(formData)
+    try {
+      const response = await fetch('/api/tickets', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
+
+      if (!response.ok) {
+        throw new Error('Error creating ticket');
+      }
+      const data = await response.json();
+      console.log(data.message); 
+      
+      setFormData({
+        username: '',
+        email: '',
+        age: '',
+        gender: '',
+        productPurchased: '',
+        title: '',
+        description: '',
+      });
+
+    } catch (err) {
+      console.error('Error submitting ticket:', err);
+      // Display error message to user (optional)
+    }
+  };
   return (
       
         <form onSubmit={handleSubmit}>

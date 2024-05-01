@@ -87,6 +87,11 @@ body {
 
 body {
   color: rgb(var(--foreground-rgb));
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   background: linear-gradient(
       to bottom,
       transparent,
